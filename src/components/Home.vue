@@ -1,29 +1,11 @@
 <template>
   <h2>Filter LearnVue Articles</h2>
-    <input type="text" placeholder="Filter Search" v-model="query" />
-    <button @click="reset">Reset</button>
-    <search-results :query="query" />
-
+  <input type="text" placeholder="Filter Search" v-model="query" />
+  <button @click="reset">Reset</button>
+  <search-results :query="query" />
 </template>
 
 
-
-<!-- using "<script setup>" -->
-<!-- To use props with <script setup> you need to call defineProps() with the component prop options as the argument-->
-<!--
-<script setup>
-import { defineProps, reactive } from 'vue'
-
-defineProps({
-  msg: String
-})
-
-const state = reactive({ count: 0 })
-</script>
-  -->
-
-
-<!-- without "<script setup>" + with "setup()"-->
 
 <script >
 import { ref } from "vue";
@@ -32,7 +14,6 @@ import { ref } from "vue";
 import SearchResults from "./SearchResultsAPI2.vue";
 
 export default {
-
   components: {
     SearchResults,
   },
@@ -42,6 +23,7 @@ export default {
   },
 
   setup() {
+
     const query = ref("");
 
     const reset = (evt) => {
