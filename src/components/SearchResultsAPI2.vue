@@ -40,18 +40,41 @@ export default {
       loading.value = true;
       errorState.value = { title: null, message: null };
 
-      try {
-        let response = await axios.get("http://127.0.0.1:5008//api/notes");
-        dataList.value = response.data;
-        console.log(dataList.value);
 
+      try {
+        let config ={
+          method: "post",
+          url: "http://localhost:5002/login",
+          data: {
+            password: "ps2",
+            username: "user2",
+          },
+          withCredentials: true,
+        };
+
+        let response = await axios(config);
+        console.log(response.data);
       } catch (err) {
         console.log(err);
-        errorState.value = errHandler(err);
       } finally {
         loading.value = false;
       }
-    };
+
+      try {
+        let response = await axios.get("http://localhost:5002/notes", {
+          withCredentials: true,
+        });
+        dataList.value = response.data;
+        console.log(dataList.value);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        loading.value = false;
+      }
+
+
+
+};
 
     const filteredItems = computed(() =>
       dataList.value.filter((item) => {
